@@ -1,51 +1,51 @@
 "use strict";
 
-var gulp = require('gulp');
-var babel = require('gulp-babel');
-var del = require('del');
-var install = require('gulp-install');
-var zip = require('gulp-zip');
-var runSequence = require('run-sequence');
-var awsLambda = require("node-aws-lambda");
+import gulp from 'gulp';
+import babel from 'gulp-babel';
+import del from 'del';
+import install from 'gulp-install';
+import zip from 'gulp-zip';
+import runSequence from 'run-sequence';
+import awsLambda from 'node-aws-lambda';
 
-var src_dir = './src/**/*.es6';
+let src_dir = './src/**/*.es6';
 
-gulp.task('build', function() {
+gulp.task('build', () => {
     return gulp.src(src_dir)
         .pipe(babel())
         .pipe(gulp.dest('lib'))
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
     gulp.watch(src_dir, ['build']);
 });
 
-gulp.task('clean', function() {
+gulp.task('clean', () => {
     return del(['./dist', './dist.zip']);
 });
 
-gulp.task('js', function() {
+gulp.task('js', () => {
     return gulp.src('lib/*.js')
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('node-mods', function() {
+gulp.task('node-mods', () => {
     return gulp.src('./package.json')
         .pipe(gulp.dest('dist/'))
         .pipe(install({ production: true }));
 });
 
-gulp.task('zip', function() {
+gulp.task('zip', () => {
     return gulp.src(['dist/**/*', '!dist/package.json'])
         .pipe(zip('dist.zip'))
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('upload', function(callback) {
+gulp.task('upload', (callback) => {
     awsLambda.deploy('./dist.zip', require('./lambda-config.js'), callback);
 });
 
-gulp.task('deploy', function(callback) {
+gulp.task('deploy', (callback) => {
     return runSequence(
         ['clean'],
         ['build'],
