@@ -1,0 +1,35 @@
+{
+  "name": "lamda-template",
+  "version": "1.0.0",
+  "description": "aws lambda bootstrap for ES6 & WebStorm",
+  "repository": "https://github.com/hoshina85/lambda_template",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha test/**/*.es6"
+  },
+  "author": "rswisteria",
+  "license": "ISC",
+  "directories": {
+    "test": "test/"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.14.0",
+    "babel": "^6.23.0",
+    "babel-plugin-espower": "^2.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-3": "^6.22.0",
+    "babel-register": "^6.23.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-install": "^0.6.0",
+    "gulp-zip": "^4.0.0",
+    "mocha": "^3.2.0",
+    "node-aws-lambda": "^0.1.8",
+    "power-assert": "^1.4.2",
+    "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0"
+  }
+}
